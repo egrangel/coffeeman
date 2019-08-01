@@ -1,34 +1,4 @@
-# coffeman
-REST API para gerenciar pessoas envolvidas na escala de fazer café ;-)
+# CoffeMan
 
-Entidades envolvidas
-  Evento
-	id
-	descricao
-	datavalidade
-	
-UsuarioEvento
-	id
-	descricao
-	idEvento
-	idUsuario
-	
-Agendamento
-	id
-	descricao
-	idEvento
-	DataAgendamento
-	
-AgendamentoUsuario
-	id
-	idAgendamento
-	idUsuario
-	HoraAgendamento
-	Status
-	
-Usuario
-	id
-	nome
-	email
-	perfil
-	ativo
+CoffeMan é uma aplicação para gerenciar os horários e pessoas envolvidas na escala de café
+
