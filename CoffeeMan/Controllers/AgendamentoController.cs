@@ -11,9 +11,9 @@ namespace CoffeeManApi.Controllers
     [ApiController]
     public class AgendamentoController : ControllerBase
     {
-        private readonly CoffeManContext _context;
+        private readonly CoffeeManContext _context;
 
-        public AgendamentoController(CoffeManContext context)
+        public AgendamentoController(CoffeeManContext context)
         {
             _context = context;
 

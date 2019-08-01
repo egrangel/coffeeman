@@ -11,9 +11,9 @@ namespace CoffeeManApi.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly CoffeManContext _context;
+        private readonly CoffeeManContext _context;
 
-        public UsuarioController(CoffeManContext context)
+        public UsuarioController(CoffeeManContext context)
         {
             _context = context;
 
@@ -44,7 +44,7 @@ namespace CoffeeManApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuarioAsync(Usuario Usuario)
+        public async Task<ActionResult<Usuario>> PostUsuarioAsync([FromBody]Usuario Usuario)
         {
             _context.Usuarios.Add(Usuario);
             await _context.SaveChangesAsync();
