@@ -14,9 +14,15 @@ namespace CoffeeManApi.Models
         }
 
         public DbSet<Evento> Eventos { get; set; }
-        public DbSet<Agendamento> Agendamentos { get; set; }
-        public DbSet<AgendamentoUsuario> AgendamentoUsuarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioEvento> UsuarioEventos { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"PG_CONNECTION_STRING_SQLSERVER");
+            }
+        }
     }
 }

@@ -16,12 +16,6 @@ namespace CoffeeManApi.Controllers
         public UsuarioController(CoffeeManContext context)
         {
             _context = context;
-
-            if (_context.Usuarios.Count() == 0)
-            {
-                _context.Usuarios.Add(new Usuario { Id = 1, Nome = "Usuario 1" });
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -30,10 +24,10 @@ namespace CoffeeManApi.Controllers
             return await _context.Usuarios.ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuarioAsync(long id)
+        [HttpGet("{idUsuario}")]
+        public async Task<ActionResult<Usuario>> GetUsuarioAsync(long idUsuario)
         {
-            var Usuario = await _context.Usuarios.FindAsync(id);
+            var Usuario = await _context.Usuarios.FindAsync(idUsuario);
 
             if (Usuario == null)
             {
@@ -49,13 +43,13 @@ namespace CoffeeManApi.Controllers
             _context.Usuarios.Add(Usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUsuarioAsync), new { id = Usuario.Id }, Usuario);
+            return CreatedAtAction(nameof(GetUsuarioAsync), new { idUsuario = Usuario.IdUsuario }, Usuario);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Usuario>> PutUsuarioAsync(long id, Usuario Usuario)
+        [HttpPut("{idUsuario}")]
+        public async Task<ActionResult<Usuario>> PutUsuarioAsync(long idUsuario, Usuario Usuario)
         {
-            if (id != Usuario.Id)
+            if (idUsuario != Usuario.IdUsuario)
             {
                 return BadRequest();
             }
@@ -66,10 +60,10 @@ namespace CoffeeManApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Usuario>> DeleteUsuarioAsync(long id)
+        [HttpDelete("{idUsuario}")]
+        public async Task<ActionResult<Usuario>> DeleteUsuarioAsync(long idUsuario)
         {
-            var Usuario = await _context.Usuarios.FindAsync(id);
+            var Usuario = await _context.Usuarios.FindAsync(idUsuario);
 
             if (Usuario == null)
             {

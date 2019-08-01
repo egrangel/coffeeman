@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="src\controllers\AgendamentoController.cs" />
+    <Compile Remove="src\controllers\AgendamentoUsuarioController.cs" />
+    <Compile Remove="src\models\Agendamento.cs" />
+    <Compile Remove="src\models\AgendamentoUsuario.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="SwashBuckle.AspNetCore" Version="4.0.1" />

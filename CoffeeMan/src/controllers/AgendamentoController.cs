@@ -16,12 +16,6 @@ namespace CoffeeManApi.Controllers
         public AgendamentoController(CoffeeManContext context)
         {
             _context = context;
-
-            if (_context.Agendamentos.Count() == 0)
-            {
-                _context.Agendamentos.Add(new Agendamento { Id = 1, Descricao = "Agendamento 1" });
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -30,10 +24,10 @@ namespace CoffeeManApi.Controllers
             return await _context.Agendamentos.ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Agendamento>> GetAgendamentoAsync(long id)
+        [HttpGet("{idagendamento}")]
+        public async Task<ActionResult<Agendamento>> GetAgendamentoAsync(long idagendamento)
         {
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _context.Agendamentos.FindAsync(idagendamento);
 
             if (agendamento == null)
             {
@@ -49,13 +43,13 @@ namespace CoffeeManApi.Controllers
             _context.Agendamentos.Add(agendamento);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAgendamentoAsync), new { id = agendamento.Id }, agendamento);
+            return CreatedAtAction(nameof(GetAgendamentoAsync), new { idagendamento = agendamento.IdAgendamento }, agendamento);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Agendamento>> PutAgendamentoAsync(long id, Agendamento agendamento)
+        [HttpPut("{idagendamento}")]
+        public async Task<ActionResult<Agendamento>> PutAgendamentoAsync(long idagendamento, Agendamento agendamento)
         {
-            if (id != agendamento.Id)
+            if (idagendamento != agendamento.IdAgendamento)
             {
                 return BadRequest();
             }
@@ -66,10 +60,10 @@ namespace CoffeeManApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Agendamento>> DeleteAgendamentoAsync(long id)
+        [HttpDelete("{idagendamento}")]
+        public async Task<ActionResult<Agendamento>> DeleteAgendamentoAsync(long idagendamento)
         {
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _context.Agendamentos.FindAsync(idagendamento);
 
             if (agendamento == null)
             {

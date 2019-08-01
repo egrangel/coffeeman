@@ -16,12 +16,6 @@ namespace CoffeeManApi.Controllers
         public AgendamentoUsuarioController(CoffeeManContext context)
         {
             _context = context;
-
-            if (_context.AgendamentoUsuarios.Count() == 0)
-            {
-                _context.AgendamentoUsuarios.Add(new AgendamentoUsuario { Id = 1, Descricao = "AgendamentoUsuario 1" });
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -30,10 +24,10 @@ namespace CoffeeManApi.Controllers
             return await _context.AgendamentoUsuarios.ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AgendamentoUsuario>> GetAgendamentoUsuarioAsync(long id)
+        [HttpGet("{idAgendamentoUsuario}")]
+        public async Task<ActionResult<AgendamentoUsuario>> GetAgendamentoUsuarioAsync(long idAgendamentoUsuario)
         {
-            var AgendamentoUsuario = await _context.AgendamentoUsuarios.FindAsync(id);
+            var AgendamentoUsuario = await _context.AgendamentoUsuarios.FindAsync(idAgendamentoUsuario);
 
             if (AgendamentoUsuario == null)
             {
@@ -49,13 +43,13 @@ namespace CoffeeManApi.Controllers
             _context.AgendamentoUsuarios.Add(AgendamentoUsuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAgendamentoUsuarioAsync), new { id = AgendamentoUsuario.Id }, AgendamentoUsuario);
+            return CreatedAtAction(nameof(GetAgendamentoUsuarioAsync), new { idAgendamentoUsuario = AgendamentoUsuario.IdAgendamentoUsuario }, AgendamentoUsuario);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<AgendamentoUsuario>> PutAgendamentoUsuarioAsync(long id, AgendamentoUsuario AgendamentoUsuario)
+        [HttpPut("{idAgendamentoUsuario}")]
+        public async Task<ActionResult<AgendamentoUsuario>> PutAgendamentoUsuarioAsync(long idAgendamentoUsuario, AgendamentoUsuario AgendamentoUsuario)
         {
-            if (id != AgendamentoUsuario.Id)
+            if (idAgendamentoUsuario != AgendamentoUsuario.IdAgendamentoUsuario)
             {
                 return BadRequest();
             }
@@ -66,10 +60,10 @@ namespace CoffeeManApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<AgendamentoUsuario>> DeleteAgendamentoUsuarioAsync(long id)
+        [HttpDelete("{idAgendamentoUsuario}")]
+        public async Task<ActionResult<AgendamentoUsuario>> DeleteAgendamentoUsuarioAsync(long idAgendamentoUsuario)
         {
-            var AgendamentoUsuario = await _context.AgendamentoUsuarios.FindAsync(id);
+            var AgendamentoUsuario = await _context.AgendamentoUsuarios.FindAsync(idAgendamentoUsuario);
 
             if (AgendamentoUsuario == null)
             {

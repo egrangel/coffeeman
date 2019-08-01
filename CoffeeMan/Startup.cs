@@ -21,8 +21,11 @@ namespace CoffeeManApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CoffeeManContext>(opt =>
-               opt.UseInMemoryDatabase("CoffeeMan"));
+            services.AddDbContext<CoffeeManContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PG_CONNECTION_STRING_SQLSERVER")));
+
+            //services.AddDbContext<CoffeeManContext>(opt =>
+            //   opt.UseInMemoryDatabase("CoffeeMan"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

@@ -17,14 +17,6 @@ namespace CoffeeManApi.Controllers
         public EventoController(CoffeeManContext context)
         {
             _context = context;
-
-            if (_context.Eventos.Count() == 0)
-            {
-                // Create a new TodoItem if collection is empty,
-                // which means you can't delete all TodoItems.
-                _context.Eventos.Add(new Evento { Id = 1, Descricao = "Evento1" });
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/Evento
@@ -35,10 +27,10 @@ namespace CoffeeManApi.Controllers
         }
 
         // GET: api/Evento/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Evento>> GetEventoAsync(long id)
+        [HttpGet("{idEvento}")]
+        public async Task<ActionResult<Evento>> GetEventoAsync(long idEvento)
         {
-            var evento = await _context.Eventos.FindAsync(id);
+            var evento = await _context.Eventos.FindAsync(idEvento);
 
             if (evento == null)
             {
@@ -55,13 +47,13 @@ namespace CoffeeManApi.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetEventoAsync), new { id = evento.Id }, evento);
+            return CreatedAtAction(nameof(GetEventoAsync), new { idEvento = evento.IdEvento }, evento);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Evento>> PutEventoAsync(long id, Evento evento)
+        [HttpPut("{idEvento}")]
+        public async Task<ActionResult<Evento>> PutEventoAsync(long idEvento, Evento evento)
         {
-            if (id != evento.Id)
+            if (idEvento != evento.IdEvento)
             {
                 return BadRequest();
             }
@@ -72,10 +64,10 @@ namespace CoffeeManApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Evento>> DeleteEventoAsync(long id)
+        [HttpDelete("{idEvento}")]
+        public async Task<ActionResult<Evento>> DeleteEventoAsync(long idEvento)
         {
-            var evento = await _context.Eventos.FindAsync(id);
+            var evento = await _context.Eventos.FindAsync(idEvento);
 
             if (evento == null)
             {
